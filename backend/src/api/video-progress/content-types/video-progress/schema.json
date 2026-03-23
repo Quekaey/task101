@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "video_progresses",
+  "info": {
+    "singularName": "video-progress",
+    "pluralName": "video-progresses",
+    "displayName": "Video Progress",
+    "description": "Tracks watch state for a user and a video"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "watchedSeconds": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "durationSeconds": {
+      "type": "decimal"
+    },
+    "completionPercent": {
+      "type": "decimal",
+      "default": 0
+    },
+    "lastWatchedAt": {
+      "type": "datetime"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "required": true
+    },
+    "video": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::video.video",
+      "required": true
+    }
+  }
+}

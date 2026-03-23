@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "singularName": "video",
+    "pluralName": "videos",
+    "displayName": "Video",
+    "description": "A video that users can watch"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "driveFileId": {
+      "type": "string"
+    },
+    "streamUrl": {
+      "type": "string"
+    },
+    "durationSeconds": {
+      "type": "decimal"
+    }
+  }
+}
