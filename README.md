@@ -21,50 +21,12 @@ Basic full-stack app where authenticated users watch a video hosted on Google Dr
 - Node.js `18.x`, `20.x`, or `22.x`
 - npm `>= 8`
 
-## 2) Backend Setup (Strapi)
-
-```bash
-cd backend
-cp .env.example .env
-npm install
-npm run develop
-```
-
-Then in Strapi Admin (`http://localhost:1337/admin`):
-
-1. Create your admin account.
-2. Go to **Content Manager** and create at least one `Video` entry.
-3. For each video set:
-   - `title` (required)
-   - Either `streamUrl` OR `driveFileId`
-   - Optional `description`, `durationSeconds`
-4. Go to **Settings -> Users & Permissions Plugin -> Roles -> Authenticated** and enable:
-   - `video`: `find`, `findOne`
-   - `video-progress`: `getMeProgress`, `upsertMeProgress`
-5. Create a normal app user at **Content Manager -> User** (or via `/api/auth/local/register`).
-
-## 3) Frontend Setup (React)
-
-```bash
-cd frontend
-cp .env.example .env
-npm install
-npm run dev
-```
-
-Frontend runs on `http://localhost:5173` by default.
-
 ## API Endpoints Used
 - `POST /api/auth/local` (login)
 - `GET /api/videos` (fetch first available video)
 - `GET /api/video-progress/me/:videoId` (read current user progress)
 - `POST /api/video-progress/me` (upsert progress)
 
-## Google Drive Notes
-- If `streamUrl` is set, frontend uses it directly.
-- If only `driveFileId` is set, frontend builds:
-  - `https://drive.google.com/uc?export=download&id=<FILE_ID>`
-- Ensure the Drive file is shared appropriately so the browser can fetch it.
 
 ## Progress Payload Shape
 `POST /api/video-progress/me`
@@ -79,5 +41,3 @@ Frontend runs on `http://localhost:5173` by default.
 
 The backend computes and stores `completionPercent` and `lastWatchedAt`.
 
-## Important Limitation
-Google Drive preview embeds (`/file/d/.../preview`) do not expose reliable playback events to your app. For resume tracking, use a direct playable stream/download URL.
